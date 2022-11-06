@@ -22,7 +22,6 @@ public class PaintApplication extends Application {
     private Scene scene;
     private BorderPane root;
     private DrawingPane drawingPane;
-    private Observer observer;
 
     private Button clearButton;
     private Button rectangleButton;
@@ -34,17 +33,16 @@ public class PaintApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         root = new BorderPane();
         scene = new Scene(root, WIDTH, HEIGHT);
+        HBox hBox = new HBox();
+        StatutBar statutBar = new StatutBar();
 
         root.getStylesheets().add(
                 PaintApplication.class.getClassLoader().getResource("style/Paint.css").toExternalForm());
 
         drawingPane = new DrawingPane();
         drawingPane.getStyleClass().add("drawingPane");
-        drawingPane.addObserver(observer);
+        drawingPane.addObserver(statutBar);
         root.setCenter(drawingPane);
-
-        HBox hBox = new HBox();
-        StatutBar statutBar = new StatutBar();
 
         clearButton = new Button("Clear");
         clearButton.addEventFilter(ActionEvent.ACTION, new ClearButtonHandler(drawingPane));

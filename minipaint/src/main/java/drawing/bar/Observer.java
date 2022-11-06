@@ -1,5 +1,10 @@
 package drawing.bar;
 
+import javafx.scene.shape.Shape;
+
+import java.util.List;
+
 public interface Observer {
-    public void update();
+
+    void update(List<Shape> shapes);
 }

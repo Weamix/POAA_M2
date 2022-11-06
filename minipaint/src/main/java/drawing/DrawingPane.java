@@ -23,6 +23,7 @@ public class DrawingPane extends Pane implements Iterable<Shape> {
     public DrawingPane() {
         clipChildren();
         shapes = new ArrayList<>();
+        observers = new ArrayList<>();
         mouseMoveHandler = new MouseMoveHandler(this);
     }
 
@@ -45,11 +46,13 @@ public class DrawingPane extends Pane implements Iterable<Shape> {
     public void addShape(Shape shape) {
         shapes.add(shape);
         this.getChildren().add(shape);
+        observers.forEach(observer -> observer.update(shapes));
     }
 
     public void removeShape(Shape shape) {
         shapes.remove(shape);
         this.getChildren().remove(shape);
+        observers.forEach(observer -> observer.update(shapes));
     }
 
     public void clear() {
