@@ -12,3 +12,6 @@ Cette application en JavaFX, permettant de dessiner des formes géométriques, v
 - [TP8 – Le retour de l'Observer](docs/TP8.md)
 - [TP9 – Changement de stratégie](docs/TP9.md)
 
+# How to run?
+In Maven plugin command 
+`mvn clean javafx:run`

@@ -1,6 +1,5 @@
 package drawing;
 
-import drawing.bar.Observer;
 import drawing.bar.StatutBar;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -13,6 +12,7 @@ import javafx.stage.Stage;
 
 /**
  * Created by lewandowski on 20/12/2020.
+ * Updated by mvitse on 2022
  */
 public class PaintApplication extends Application {
 
@@ -26,7 +26,6 @@ public class PaintApplication extends Application {
     private Button clearButton;
     private Button rectangleButton;
     private Button circleButton;
-
     private Button triangleButton;
 
     @Override
