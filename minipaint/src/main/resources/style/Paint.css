@@ -1,0 +1,28 @@
+
+.toolbar {
+    -fx-border-style: solid;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-border-color: darkgrey;
+}
+
+.drawingPane {
+    -fx-background-color: white;
+}
+
+.rectangle {
+    -fx-fill: greenyellow;
+    -fx-stroke: green;
+    -fx-stroke-width: 3;
+}
+
+.ellipse {
+    -fx-fill: yellow;
+    -fx-stroke: orange;
+    -fx-stroke-width: 3;
+}
+
+.statutBar {
+    -fx-border-style: solid;
+    -fx-border-width: 1px 0px 0px 0px;
+    -fx-border-color: darkgrey;
+}
