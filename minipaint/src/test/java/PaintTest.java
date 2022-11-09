@@ -1,4 +1,6 @@
 import drawing.PaintApplication;
+import drawing.bar.Observer;
+import drawing.bar.StatutBar;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -70,7 +72,7 @@ public class PaintTest extends ApplicationTest {
         interact(() -> {
             app.getDrawingPane().addShape(new Polygon(20, 20, 30, 30, 40, 40));
         });
-        Iterator it = app.getDrawingPane().iterator();
+        var it = app.getDrawingPane().iterator();
         assertTrue(it.next() instanceof Polygon);
         assertFalse(it.hasNext());
     }
@@ -79,7 +81,7 @@ public class PaintTest extends ApplicationTest {
     public void should_draw_triangle() {
         // given:
         clickOn("Triangle");
-        moveBy(0,60);
+        moveBy(-30,100);
 
         // when:
         drag().dropBy(70, 40);
@@ -104,6 +106,25 @@ public class PaintTest extends ApplicationTest {
 
         // then:
         assertFalse(app.getDrawingPane().iterator().hasNext());
+    }
+
+    @Test
+    public void should_update_statut_bar_test() throws InterruptedException {
+        clickOn("Triangle");
+        moveBy(-30,100).drag().dropBy(70, 40);
+        assertEquals("1 forme(s)", app.getStatubar().getNbForms());
+
+        clickOn("Circle");
+        moveBy(60,60).drag().dropBy(30,30);
+        assertEquals("2 forme(s)", app.getStatubar().getNbForms());
+
+        clickOn("Rectangle");
+        moveBy(0,60).drag().dropBy(70,40);
+        assertEquals("3 forme(s)", app.getStatubar().getNbForms());
+
+        clickOn("Clear");
+        assertFalse(app.getDrawingPane().iterator().hasNext());
+        assertEquals("0 forme(s)", app.getStatubar().getNbForms());
     }
 
 }

@@ -22,6 +22,7 @@ public class PaintApplication extends Application {
     private Scene scene;
     private BorderPane root;
     private DrawingPane drawingPane;
+    private StatutBar statutBar;
 
     private Button clearButton;
     private Button rectangleButton;
@@ -33,7 +34,7 @@ public class PaintApplication extends Application {
         root = new BorderPane();
         scene = new Scene(root, WIDTH, HEIGHT);
         HBox hBox = new HBox();
-        StatutBar statutBar = new StatutBar();
+        statutBar = new StatutBar();
 
         root.getStylesheets().add(
                 PaintApplication.class.getClassLoader().getResource("style/Paint.css").toExternalForm());
@@ -75,6 +76,8 @@ public class PaintApplication extends Application {
     public DrawingPane getDrawingPane() {
         return drawingPane;
     }
+
+    public StatutBar getStatubar() { return statutBar;}
 
     public static void main(String[] args) {
         launch(args);

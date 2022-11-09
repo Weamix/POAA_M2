@@ -17,6 +17,10 @@ public class StatutBar extends HBox implements Observer{
         getChildren().add(nbForms);
     }
 
+    public String getNbForms() {
+        return nbForms.getText();
+    }
+
     @Override
     public void update(final List<Shape> shapes) {
         nbForms.setText(shapes.size() + FORME_S);

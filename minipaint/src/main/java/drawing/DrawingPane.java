@@ -56,17 +56,22 @@ public class DrawingPane extends Pane implements Iterable<Shape> {
     }
 
     public void clear() {
-        observers.forEach(observer -> observer.update(shapes));
         this.getChildren().removeAll(shapes);
         shapes.clear();
+        observers.forEach(observer -> observer.update(shapes));
     }
 
     public void addObserver(Observer observer){
         observers.add(observer);
     }
 
+    public Iterator<Observer> getObservers() {
+        return observers.iterator();
+    }
+
     @Override
     public Iterator<Shape> iterator() {
         return shapes.iterator();
     }
+
 }
