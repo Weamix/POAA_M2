@@ -1,10 +1,10 @@
 package drawing;
 
+import drawing.adapter.IShape;
 import drawing.bar.Observer;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,11 +13,10 @@ import java.util.List;
 /**
  * Created by lewandowski on 20/12/2020.
  */
-public class DrawingPane extends Pane implements Iterable<Shape> {
+public class DrawingPane extends Pane implements Iterable<IShape> {
 
     private MouseMoveHandler mouseMoveHandler;
-
-    private ArrayList<Shape> shapes;
+    private List<IShape> shapes;
     private List<Observer> observers;
 
     public DrawingPane() {
@@ -43,22 +42,25 @@ public class DrawingPane extends Pane implements Iterable<Shape> {
         });
     }
 
-    public void addShape(Shape shape) {
+    public void addShape(IShape shape) {
         shapes.add(shape);
-        this.getChildren().add(shape);
+        //this.getChildren().add(shape);
+        shape.addShapeToPane(this);
         observers.forEach(observer -> observer.update(shapes));
     }
 
-    public void removeShape(Shape shape) {
+    public void removeShape(IShape shape) {
         shapes.remove(shape);
-        this.getChildren().remove(shape);
+        //this.getChildren().remove(shape);
+        shape.removeShapeFromPane(this);
         observers.forEach(observer -> observer.update(shapes));
     }
 
     public void clear() {
-        this.getChildren().removeAll(shapes);
-        shapes.clear();
+        //this.getChildren().removeAll(shapes);
         observers.forEach(observer -> observer.update(shapes));
+        shapes.forEach(shape->shape.removeShapeFromPane(this));
+        shapes.clear();
     }
 
     public void addObserver(Observer observer){
@@ -70,7 +72,7 @@ public class DrawingPane extends Pane implements Iterable<Shape> {
     }
 
     @Override
-    public Iterator<Shape> iterator() {
+    public Iterator<IShape> iterator() {
         return shapes.iterator();
     }
 

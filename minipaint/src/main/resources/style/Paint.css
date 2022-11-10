@@ -26,3 +26,5 @@
     -fx-border-width: 1px 0px 0px 0px;
     -fx-border-color: darkgrey;
 }
+
+.selected{ -fx-effect:dropshadow(gaussian,cornflowerblue,8,0.7,0,0);  }

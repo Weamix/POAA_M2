@@ -1,10 +1,10 @@
 package drawing.bar;
 
-import javafx.scene.shape.Shape;
+import drawing.adapter.IShape;
 
 import java.util.List;
 
 public interface Observer {
 
-    void update(List<Shape> shapes);
+    void update(List<IShape> shapes);
 }

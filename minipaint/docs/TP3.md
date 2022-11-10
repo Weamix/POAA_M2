@@ -10,6 +10,7 @@ Pour différentes raisons, l’architecte souhaite que l’application utilise l
 >**🖥 TODO**
 >
 > - Expliquez pourquoi ce n’est pas une bonne solution. 💩
+> - Ceci implique trop de modifications dans les classes étendues
 
 <br>
 L'interface `IShape` en question :

@@ -5,6 +5,7 @@ import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
@@ -26,6 +27,7 @@ public class PaintTest extends ApplicationTest {
         }
     }
 
+    @Ignore
     @Test
     public void should_draw_circle_programmatically() {
         interact(() -> {
@@ -68,6 +70,7 @@ public class PaintTest extends ApplicationTest {
     }
 
     @Test
+    @Ignore
     public void should_draw_triangle_programmatically() {
         interact(() -> {
             app.getDrawingPane().addShape(new Polygon(20, 20, 30, 30, 40, 40));
