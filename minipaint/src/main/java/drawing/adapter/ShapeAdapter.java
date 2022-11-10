@@ -23,7 +23,7 @@ public class ShapeAdapter implements IShape {
         if(selected) {
             shape.getStyleClass().add("selected");
         }else{
-            shape.getStyleClass().remove("selected");
+            shape.getStyleClass().removeAll("selected");
         }
     }
 
