@@ -1,6 +1,11 @@
 package drawing;
 
 import drawing.bar.StatutBar;
+import drawing.handler.ClearButtonHandler;
+import drawing.handler.DeleteButtonHandler;
+import drawing.handler.shapes.EllipseButtonHandler;
+import drawing.handler.shapes.RectangleButtonHandler;
+import drawing.handler.shapes.TriangleButtonHandler;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -25,6 +30,7 @@ public class PaintApplication extends Application {
     private StatutBar statutBar;
 
     private Button clearButton;
+    private Button deleteButton;
     private Button rectangleButton;
     private Button circleButton;
     private Button triangleButton;
@@ -47,6 +53,9 @@ public class PaintApplication extends Application {
         clearButton = new Button("Clear");
         clearButton.addEventFilter(ActionEvent.ACTION, new ClearButtonHandler(drawingPane));
 
+        deleteButton = new Button("Delete");
+        deleteButton.addEventFilter(ActionEvent.ACTION, new DeleteButtonHandler(drawingPane));
+
         rectangleButton = new Button("Rectangle");
         rectangleButton.addEventFilter(ActionEvent.ACTION, new RectangleButtonHandler(drawingPane));
 
@@ -56,7 +65,7 @@ public class PaintApplication extends Application {
         triangleButton = new Button("Triangle");
         triangleButton.addEventFilter(ActionEvent.ACTION, new TriangleButtonHandler(drawingPane));
 
-        hBox.getChildren().addAll(clearButton, rectangleButton, circleButton, triangleButton);
+        hBox.getChildren().addAll(clearButton,deleteButton, rectangleButton, circleButton, triangleButton);
         hBox.setPadding(new Insets(5));
         hBox.setSpacing(5.0);
         hBox.getStyleClass().add("toolbar");

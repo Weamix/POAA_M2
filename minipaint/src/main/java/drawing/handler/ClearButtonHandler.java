@@ -1,5 +1,6 @@
-package drawing;
+package drawing.handler;
 
+import drawing.DrawingPane;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 

@@ -1,5 +1,6 @@
-package drawing;
+package drawing.handler.shapes;
 
+import drawing.DrawingPane;
 import drawing.adapter.IShape;
 import drawing.adapter.ShapeAdapter;
 import javafx.scene.shape.Rectangle;

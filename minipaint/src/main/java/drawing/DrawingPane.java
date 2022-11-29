@@ -2,6 +2,7 @@ package drawing;
 
 import drawing.adapter.IShape;
 import drawing.bar.Observer;
+import drawing.handler.MouseMoveHandler;
 import drawing.handler.SelectionHandler;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
@@ -58,9 +59,9 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
     }
 
     public void clear() {
-        updateObservers();
         shapes.forEach(shape->shape.removeShapeFromPane(this));
         shapes.clear();
+        updateObservers();
     }
 
     public void updateObservers(){

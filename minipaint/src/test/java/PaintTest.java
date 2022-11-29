@@ -121,7 +121,6 @@ public class PaintTest extends ApplicationTest {
         assertEquals("3 forme(s)", app.getStatubar().getNbForms());
 
         clickOn("Clear");
-        clickOn("Clear"); // TODO : fix the problem on needed 2 clicks on clear to update observer ?
         assertFalse(app.getDrawingPane().iterator().hasNext());
         assertEquals("0 forme(s)", app.getStatubar().getNbForms());
     }
@@ -131,6 +130,15 @@ public class PaintTest extends ApplicationTest {
         should_draw_triangle();
         clickOn(".triangle");
         assertEquals(" dont 1 selected forme(s)", app.getStatubar().getNbSelectedForms());
+    }
+
+    @Test
+    public void should_delete_selected_shapes(){
+        should_draw_triangle();
+        clickOn(".triangle");
+        clickOn("Delete");
+        var it = app.getDrawingPane().getChildren().iterator();
+        assertTrue(!it.hasNext());
     }
 
 }
