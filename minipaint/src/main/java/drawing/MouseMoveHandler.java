@@ -27,10 +27,10 @@ public class MouseMoveHandler implements EventHandler<MouseEvent> {
             orgSceneY = event.getSceneY();
         }
 
-        if (event.getEventType().equals(MouseEvent.MOUSE_DRAGGED) && drawingPane.getSelection() != null) {
+        if (event.getEventType().equals(MouseEvent.MOUSE_DRAGGED) && drawingPane.getListSelectedShapes() != null) {
             double offsetX = event.getSceneX() - orgSceneX;
             double offsetY = event.getSceneY() - orgSceneY;
-            drawingPane.getSelection().forEach(shape -> shape.offset(offsetX, offsetY));
+            drawingPane.getListSelectedShapes().forEach(shape -> shape.offset(offsetX, offsetY));
 
             orgSceneX = event.getSceneX();
             orgSceneY = event.getSceneY();

@@ -48,22 +48,26 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
     public void addShape(IShape shape) {
         shapes.add(shape);
         shape.addShapeToPane(this);
-        observers.forEach(observer -> observer.update(shapes));
+        updateObservers();
     }
 
     public void removeShape(IShape shape) {
         shapes.remove(shape);
         shape.removeShapeFromPane(this);
-        observers.forEach(observer -> observer.update(shapes));
+        updateObservers();
     }
 
     public void clear() {
-        observers.forEach(observer -> observer.update(shapes));
+        updateObservers();
         shapes.forEach(shape->shape.removeShapeFromPane(this));
         shapes.clear();
     }
 
-    public List<IShape> getSelection(){
+    public void updateObservers(){
+        observers.forEach(observer -> observer.update(shapes, getListSelectedShapes()));
+    }
+
+    public List<IShape> getListSelectedShapes(){
         return selectionHandler.getListSelectedShape();
     }
 

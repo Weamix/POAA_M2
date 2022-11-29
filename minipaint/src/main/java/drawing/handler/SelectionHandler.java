@@ -2,6 +2,7 @@ package drawing.handler;
 
 import drawing.DrawingPane;
 import drawing.adapter.IShape;
+import drawing.bar.Observer;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
@@ -11,6 +12,8 @@ import java.util.List;
 public class SelectionHandler implements EventHandler<MouseEvent> {
     private DrawingPane drawingPane;
     private List<IShape> listSelectedShape;
+
+    private List<Observer> observers;
 
     public SelectionHandler(DrawingPane drawingPane) {
         this.drawingPane = drawingPane;
@@ -37,6 +40,7 @@ public class SelectionHandler implements EventHandler<MouseEvent> {
                 }
             }
         }
+        drawingPane.updateObservers();
     }
 
     private void handleSelectionWhenShiftIsDown(IShape shape) {
@@ -56,9 +60,13 @@ public class SelectionHandler implements EventHandler<MouseEvent> {
     }
 
     private void addSelectedShapeToSelection(IShape shape) {
-        System.out.println("Add selected shape to selection:" + shape);
-        shape.setSelected(true);
-        listSelectedShape.add(shape);
+        if(shape.isSelected()){
+            removeSelectedShapeToSelection(shape);
+        } else{
+            System.out.println("Add selected shape to selection:" + shape);
+            shape.setSelected(true);
+            listSelectedShape.add(shape);
+        }
     }
 
     private void removeAllFromSelection() {
