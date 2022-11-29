@@ -1,7 +1,7 @@
 package drawing;
 
 import drawing.adapter.IShape;
-import drawing.bar.Observer;
+import drawing.ui.bar.Observer;
 import drawing.handler.MouseMoveHandler;
 import drawing.handler.SelectionHandler;
 import javafx.scene.layout.Pane;

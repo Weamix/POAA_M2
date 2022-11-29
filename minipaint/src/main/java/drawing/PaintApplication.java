@@ -1,11 +1,12 @@
 package drawing;
 
-import drawing.bar.StatutBar;
-import drawing.handler.ClearButtonHandler;
-import drawing.handler.DeleteButtonHandler;
-import drawing.handler.shapes.EllipseButtonHandler;
-import drawing.handler.shapes.RectangleButtonHandler;
-import drawing.handler.shapes.TriangleButtonHandler;
+import drawing.ui.bar.StatutBar;
+import drawing.handler.buttons.ClearButtonHandler;
+import drawing.handler.buttons.DeleteButtonHandler;
+import drawing.handler.buttons.shapes.EllipseButtonHandler;
+import drawing.handler.buttons.shapes.RectangleButtonHandler;
+import drawing.handler.buttons.shapes.TriangleButtonHandler;
+import drawing.ui.bar.Toolbar;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -29,14 +30,8 @@ public class PaintApplication extends Application {
     private DrawingPane drawingPane;
     private StatutBar statutBar;
 
-    private Button clearButton;
-    private Button deleteButton;
-    private Button rectangleButton;
-    private Button circleButton;
-    private Button triangleButton;
-
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage){
         root = new BorderPane();
         scene = new Scene(root, WIDTH, HEIGHT);
         HBox hBox = new HBox();
@@ -50,22 +45,8 @@ public class PaintApplication extends Application {
         drawingPane.addObserver(statutBar);
         root.setCenter(drawingPane);
 
-        clearButton = new Button("Clear");
-        clearButton.addEventFilter(ActionEvent.ACTION, new ClearButtonHandler(drawingPane));
-
-        deleteButton = new Button("Delete");
-        deleteButton.addEventFilter(ActionEvent.ACTION, new DeleteButtonHandler(drawingPane));
-
-        rectangleButton = new Button("Rectangle");
-        rectangleButton.addEventFilter(ActionEvent.ACTION, new RectangleButtonHandler(drawingPane));
-
-        circleButton = new Button("Circle");
-        circleButton.addEventFilter(ActionEvent.ACTION, new EllipseButtonHandler(drawingPane));
-
-        triangleButton = new Button("Triangle");
-        triangleButton.addEventFilter(ActionEvent.ACTION, new TriangleButtonHandler(drawingPane));
-
-        hBox.getChildren().addAll(clearButton,deleteButton, rectangleButton, circleButton, triangleButton);
+        Toolbar.initToolbar(drawingPane);
+        hBox.getChildren().addAll(Toolbar.getButtons());
         hBox.setPadding(new Insets(5));
         hBox.setSpacing(5.0);
         hBox.getStyleClass().add("toolbar");

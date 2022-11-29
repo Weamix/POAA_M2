@@ -1,4 +1,4 @@
-package drawing.bar;
+package drawing.ui.bar;
 
 import drawing.adapter.IShape;
 import javafx.scene.control.Label;

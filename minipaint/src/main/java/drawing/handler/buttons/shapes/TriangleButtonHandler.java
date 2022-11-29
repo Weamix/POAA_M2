@@ -1,4 +1,4 @@
-package drawing.handler.shapes;
+package drawing.handler.buttons.shapes;
 
 import drawing.DrawingPane;
 import drawing.adapter.IShape;

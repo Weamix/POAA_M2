@@ -1,4 +1,4 @@
-package drawing.handler;
+package drawing.handler.buttons;
 
 import drawing.DrawingPane;
 import javafx.event.ActionEvent;
