@@ -17,7 +17,7 @@ public class Toolbar {
 
     private static List<Button> buttons;
 
-    public Toolbar(List<Button> buttons) {
+    private Toolbar(List<Button> buttons) {
         this.buttons = buttons;
     }
 

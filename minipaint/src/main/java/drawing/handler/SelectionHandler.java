@@ -2,7 +2,6 @@ package drawing.handler;
 
 import drawing.DrawingPane;
 import drawing.adapter.IShape;
-import drawing.ui.bar.Observer;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
@@ -12,8 +11,6 @@ import java.util.List;
 public class SelectionHandler implements EventHandler<MouseEvent> {
     private DrawingPane drawingPane;
     private List<IShape> listSelectedShape;
-
-    private List<Observer> observers;
 
     public SelectionHandler(DrawingPane drawingPane) {
         this.drawingPane = drawingPane;

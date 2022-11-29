@@ -1,17 +1,10 @@
 package drawing;
 
 import drawing.ui.bar.StatutBar;
-import drawing.handler.buttons.ClearButtonHandler;
-import drawing.handler.buttons.DeleteButtonHandler;
-import drawing.handler.buttons.shapes.EllipseButtonHandler;
-import drawing.handler.buttons.shapes.RectangleButtonHandler;
-import drawing.handler.buttons.shapes.TriangleButtonHandler;
 import drawing.ui.bar.Toolbar;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;

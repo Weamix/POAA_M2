@@ -20,7 +20,7 @@ public abstract class ShapeButtonHandler implements EventHandler<Event> {
 
     protected IShape shape;
 
-    public ShapeButtonHandler(DrawingPane drawingPane) {
+    protected ShapeButtonHandler(DrawingPane drawingPane) {
         this.drawingPane = drawingPane;
     }
 
