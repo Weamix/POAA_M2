@@ -14,13 +14,14 @@ public class ButtonFactory {
         Button button = new Button();
 
         switch(style){
-            case "TEXT_ONLY":
-                button.setText(buttonName);
-                break;
             case "ICON_ONLY":
                 Image img = new Image(Toolbar.class.getClassLoader().getResource(urlImg).openStream());
                 ImageView view = new ImageView(img);
                 button.setGraphic(view);
+                break;
+            default:
+            case "TEXT_ONLY":
+                button.setText(buttonName);
                 break;
         }
 
