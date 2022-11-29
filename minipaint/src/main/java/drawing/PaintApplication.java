@@ -9,6 +9,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 /**
  * Created by lewandowski on 20/12/2020.
  * Updated by mvitse on 2022
@@ -24,7 +26,7 @@ public class PaintApplication extends Application {
     private StatutBar statutBar;
 
     @Override
-    public void start(Stage primaryStage){
+    public void start(Stage primaryStage) throws IOException {
         root = new BorderPane();
         scene = new Scene(root, WIDTH, HEIGHT);
         HBox hBox = new HBox();

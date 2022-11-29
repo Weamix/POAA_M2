@@ -6,37 +6,32 @@ import drawing.handler.buttons.DeleteButtonHandler;
 import drawing.handler.buttons.shapes.EllipseButtonHandler;
 import drawing.handler.buttons.shapes.RectangleButtonHandler;
 import drawing.handler.buttons.shapes.TriangleButtonHandler;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import drawing.ui.button.ButtonFactory;
 import javafx.scene.control.Button;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Toolbar {
 
     private static List<Button> buttons;
+    private static final String ICON_ONLY  = "ICON_ONLY";
 
     private Toolbar(List<Button> buttons) {
         this.buttons = buttons;
     }
 
-    public static Toolbar initToolbar(DrawingPane drawingPane){
+    public static Toolbar initToolbar(DrawingPane drawingPane) throws IOException {
         buttons = new ArrayList<>();
 
-        buttons.add(addButton("Clear", new ClearButtonHandler(drawingPane)));
-        buttons.add(addButton("Delete", new DeleteButtonHandler(drawingPane)));
-        buttons.add(addButton("Rectangle", new RectangleButtonHandler(drawingPane)));
-        buttons.add(addButton("Circle", new EllipseButtonHandler(drawingPane)));
-        buttons.add(addButton("Triangle", new TriangleButtonHandler(drawingPane)));
+        buttons.add(ButtonFactory.createButton("Clear", new ClearButtonHandler(drawingPane), "delete.png","TEXT_ONLY"));
+        buttons.add(ButtonFactory.createButton("Delete", new DeleteButtonHandler(drawingPane), "clear.png",ICON_ONLY));
+        buttons.add(ButtonFactory.createButton("Circle", new EllipseButtonHandler(drawingPane), "circle.png",ICON_ONLY));
+        buttons.add(ButtonFactory.createButton("Triangle", new TriangleButtonHandler(drawingPane), "triangle.png",ICON_ONLY));
+        buttons.add(ButtonFactory.createButton("Rectangle", new RectangleButtonHandler(drawingPane), "rectangle.png",ICON_ONLY));
 
         return new Toolbar(buttons);
-    }
-
-    private static Button addButton(String name, EventHandler<? super ActionEvent> handler) {
-        Button button = new Button(name);
-        button.addEventFilter(ActionEvent.ACTION, handler);
-        return button;
     }
 
     public static List<Button> getButtons() {
