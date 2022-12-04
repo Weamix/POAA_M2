@@ -1,12 +1,18 @@
 import drawing.PaintApplication;
+import drawing.adapter.IShape;
 import drawing.adapter.ShapeAdapter;
+import drawing.composite.ShapeGroupComposite;
+import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import org.junit.Assert;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -139,6 +145,30 @@ public class PaintTest extends ApplicationTest {
         clickOn("Delete");
         var it = app.getDrawingPane().getChildren().iterator();
         assertTrue(!it.hasNext());
+    }
+
+    @Test
+    public void should_group_shapes() {
+        //draw rec
+        clickOn("Rectangle");
+        moveBy(0,60);
+        drag().dropBy(70,40);
+
+        //draw tri
+        clickOn("Circle");
+        moveBy(60,60);
+        drag().dropBy(30,30);
+
+        clickOn(".rectangle");
+
+        press(KeyCode.SHIFT)
+                .clickOn(".ellipse")
+                .release(KeyCode.SHIFT);
+
+        clickOn("Group");
+
+        final List<IShape> shapes = app.getDrawingPane().getListSelectedShapes();
+        Assert.assertEquals(ShapeGroupComposite.class, shapes.get(0).getClass());
     }
 
 }
