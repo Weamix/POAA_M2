@@ -21,10 +21,11 @@ public class GroupSelectedShapesButtonHandler implements EventHandler<ActionEven
     @Override
     public void handle(ActionEvent actionEvent) {
         final List<IShape> selectedShapes = drawingPane.getListSelectedShapes();
-        selectedShapes.forEach(drawingPane::removeShape);
-        shapeGroupComposite = new ShapeGroupComposite();
-        selectedShapes.forEach(shapeGroupComposite::addShape);
-        selectedShapes.forEach(iShape -> drawingPane.addShape(shapeGroupComposite));
-        drawingPane.clear();
+        if (selectedShapes != null) {
+            selectedShapes.forEach(drawingPane::removeShape);
+            shapeGroupComposite = new ShapeGroupComposite();
+            selectedShapes.forEach(shapeGroupComposite::addShape);
+            drawingPane.addShape(shapeGroupComposite);
+        }
     }
 }
