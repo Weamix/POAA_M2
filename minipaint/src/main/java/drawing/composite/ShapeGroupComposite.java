@@ -3,17 +3,22 @@ package drawing.composite;
 import drawing.adapter.IShape;
 import javafx.scene.layout.Pane;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShapeGroupComposite implements IShape {
-    private final List<IShape> groupShapes;
+    private List<IShape> groupShapes;
 
-    public ShapeGroupComposite(List<IShape> groupShapes) {
-        this.groupShapes = groupShapes;
+    public ShapeGroupComposite() {
+        this.groupShapes = new ArrayList<>();
     }
 
-    public static IShape create(final List<IShape> group) {
-        return new ShapeGroupComposite(group);
+    public void addShape(IShape shape) {
+        groupShapes.add(shape);
+    }
+
+    public void removeShape(IShape shape) {
+        groupShapes.remove(shape);
     }
 
     public List<IShape> getGroupShapes() {

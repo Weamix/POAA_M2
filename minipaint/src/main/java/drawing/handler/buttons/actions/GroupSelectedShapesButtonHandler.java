@@ -11,6 +11,8 @@ import java.util.List;
 public class GroupSelectedShapesButtonHandler implements EventHandler<ActionEvent> {
 
     private DrawingPane drawingPane;
+    private ShapeGroupComposite shapeGroupComposite;
+
 
     public GroupSelectedShapesButtonHandler(DrawingPane drawingPane) {
         this.drawingPane = drawingPane;
@@ -20,6 +22,9 @@ public class GroupSelectedShapesButtonHandler implements EventHandler<ActionEven
     public void handle(ActionEvent actionEvent) {
         final List<IShape> selectedShapes = drawingPane.getListSelectedShapes();
         selectedShapes.forEach(drawingPane::removeShape);
-        drawingPane.addShape(ShapeGroupComposite.create(selectedShapes));
+        shapeGroupComposite = new ShapeGroupComposite();
+        selectedShapes.forEach(shapeGroupComposite::addShape);
+        selectedShapes.forEach(iShape -> drawingPane.addShape(shapeGroupComposite));
+        drawingPane.clear();
     }
 }
