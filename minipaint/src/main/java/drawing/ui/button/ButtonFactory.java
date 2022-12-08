@@ -12,6 +12,7 @@ import java.io.IOException;
 public class ButtonFactory {
     public static Button createButton(String buttonName, EventHandler<? super ActionEvent> handler, String urlImg, String style) throws IOException {
         Button button = new Button();
+        button.setId(buttonName);
 
         switch(style){
             case "ICON_ONLY":

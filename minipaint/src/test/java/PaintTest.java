@@ -6,12 +6,14 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import org.junit.Assert;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
 
+import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -43,7 +45,7 @@ public class PaintTest extends ApplicationTest {
     @Test
     public void should_draw_circle() {
         // given:
-        clickOn("Circle");
+        clickOn("#Circle");
         moveBy(60,60);
 
         // when:
@@ -59,7 +61,7 @@ public class PaintTest extends ApplicationTest {
     @Test
     public void should_draw_rectangle() {
         // given:
-        clickOn("Rectangle");
+        clickOn("#Rectangle");
         moveBy(0,60);
 
         // when:
@@ -84,7 +86,7 @@ public class PaintTest extends ApplicationTest {
     @Test
     public void should_draw_triangle() {
         // given:
-        clickOn("Triangle");
+        clickOn("#Triangle");
         moveBy(-30,100);
 
         // when:
@@ -100,13 +102,13 @@ public class PaintTest extends ApplicationTest {
     @Test
     public void should_clear() {
         // given:
-        clickOn("Rectangle");
+        clickOn("#Rectangle");
         moveBy(30,60).drag().dropBy(70,40);
-        clickOn("Circle");
+        clickOn("#Circle");
         moveBy(-30,160).drag().dropBy(70,40);
 
         // when:
-        clickOn("Clear");
+        clickOn("#Clear");
 
         // then:
         assertFalse(app.getDrawingPane().iterator().hasNext());
@@ -114,19 +116,19 @@ public class PaintTest extends ApplicationTest {
 
     @Test
     public void should_update_statut_bar_number_forms() {
-        clickOn("Triangle");
+        clickOn("#Triangle");
         moveBy(-30,100).drag().dropBy(70, 40);
         assertEquals("1 forme(s)", app.getStatubar().getNbForms());
 
-        clickOn("Circle");
+        clickOn("#Circle");
         moveBy(60,60).drag().dropBy(30,30);
         assertEquals("2 forme(s)", app.getStatubar().getNbForms());
 
-        clickOn("Rectangle");
+        clickOn("#Rectangle");
         moveBy(0,60).drag().dropBy(70,40);
         assertEquals("3 forme(s)", app.getStatubar().getNbForms());
 
-        clickOn("Clear");
+        clickOn("#Clear");
         assertFalse(app.getDrawingPane().iterator().hasNext());
         assertEquals("0 forme(s)", app.getStatubar().getNbForms());
     }
@@ -142,7 +144,7 @@ public class PaintTest extends ApplicationTest {
     public void should_delete_selected_shapes(){
         should_draw_triangle();
         clickOn(".triangle");
-        clickOn("Delete");
+        clickOn("#Delete");
         var it = app.getDrawingPane().getChildren().iterator();
         assertTrue(!it.hasNext());
     }
@@ -150,12 +152,12 @@ public class PaintTest extends ApplicationTest {
     @Test
     public void should_group_shapes() {
         //draw rec
-        clickOn("Rectangle");
+        clickOn("#Rectangle");
         moveBy(0,60);
         drag().dropBy(70,40);
 
         //draw tri
-        clickOn("Circle");
+        clickOn("#Circle");
         moveBy(60,60);
         drag().dropBy(30,30);
 
@@ -165,10 +167,11 @@ public class PaintTest extends ApplicationTest {
                 .clickOn(".ellipse")
                 .release(KeyCode.SHIFT);
 
-        clickOn("Group");
+        clickOn("#Group");
+
+        clickOn(".rectangle");
 
         final List<IShape> shapes = app.getDrawingPane().getListSelectedShapes();
-        Assert.assertEquals(ShapeGroupComposite.class, shapes.get(0).getClass());
+        Assert.assertTrue(shapes.get(0) instanceof  ShapeGroupComposite);
     }
-
 }

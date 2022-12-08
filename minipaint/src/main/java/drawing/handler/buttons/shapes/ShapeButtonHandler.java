@@ -36,6 +36,7 @@ public abstract class ShapeButtonHandler implements EventHandler<Event> {
                 drawingPane.addEventHandler(MouseEvent.MOUSE_RELEASED, this);
                 originX = ((MouseEvent) event).getX();
                 originY = ((MouseEvent) event).getY();
+                event.consume();
             }
 
             if (event.getEventType().equals(MouseEvent.MOUSE_RELEASED)) {

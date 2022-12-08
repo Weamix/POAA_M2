@@ -25,6 +25,7 @@ public class UngroupSelectedShapesButtonHandler implements EventHandler<ActionEv
                 final List<IShape> groupShapes = ((ShapeGroupComposite) shape).getGroupShapes();
                 groupShapes.forEach(drawingPane::addShape);
             }
+            drawingPane.getListSelectedShapes().clear();
         });
     }
 }
