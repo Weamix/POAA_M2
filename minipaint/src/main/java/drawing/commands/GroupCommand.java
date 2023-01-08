@@ -1,25 +1,22 @@
-package drawing.handler.buttons.actions;
+package drawing.commands;
 
 import drawing.DrawingPane;
 import drawing.adapter.IShape;
 import drawing.composite.ShapeGroupComposite;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
 import java.util.List;
 
-public class GroupSelectedShapesButtonHandler implements EventHandler<ActionEvent> {
+public class GroupCommand implements ICommand{
 
     private DrawingPane drawingPane;
     private ShapeGroupComposite shapeGroupComposite;
 
-
-    public GroupSelectedShapesButtonHandler(DrawingPane drawingPane) {
+    public GroupCommand(DrawingPane drawingPane) {
         this.drawingPane = drawingPane;
     }
 
     @Override
-    public void handle(ActionEvent actionEvent) {
+    public void execute() {
         final List<IShape> selectedShapes = drawingPane.getListSelectedShapes();
         if (selectedShapes != null && selectedShapes.size() > 1) {
             selectedShapes.forEach(drawingPane::removeShape);
@@ -29,5 +26,17 @@ public class GroupSelectedShapesButtonHandler implements EventHandler<ActionEven
             drawingPane.getListSelectedShapes().clear();
             selectedShapes.forEach(iShape -> System.out.println(iShape.getClass()));
         }
+    }
+
+    @Override
+    public void undo() {
+        new UngroupCommand(drawingPane).execute();
+    }
+
+    @Override
+    public void redo() {
+        shapeGroupComposite.getGroupShapes().forEach(shape -> drawingPane.removeShape(shape));
+        drawingPane.addShape(shapeGroupComposite);
+        drawingPane.getListSelectedShapes().clear();
     }
 }

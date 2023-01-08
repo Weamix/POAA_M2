@@ -1,31 +1,46 @@
-package drawing.handler.buttons.actions;
+package drawing.commands;
 
 import drawing.DrawingPane;
 import drawing.adapter.IShape;
 import drawing.composite.ShapeGroupComposite;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class UngroupSelectedShapesButtonHandler implements EventHandler<ActionEvent> {
-
+public class UngroupCommand implements ICommand{
     private DrawingPane drawingPane;
+    private final List<ShapeGroupComposite> shapesBackup;
 
-    public UngroupSelectedShapesButtonHandler(DrawingPane drawingPane) {
+
+    public UngroupCommand(DrawingPane drawingPane) {
         this.drawingPane = drawingPane;
+        this.shapesBackup = new ArrayList<>();
     }
 
     @Override
-    public void handle(ActionEvent actionEvent) {
+    public void execute() {
         final List<IShape> selectedShapes = drawingPane.getListSelectedShapes();
         selectedShapes.forEach(shape -> {
             if (shape instanceof ShapeGroupComposite){
                 drawingPane.removeShape(shape);
+                shapesBackup.add((ShapeGroupComposite) shape);
                 final List<IShape> groupShapes = ((ShapeGroupComposite) shape).getGroupShapes();
                 groupShapes.forEach(drawingPane::addShape);
             }
             drawingPane.getListSelectedShapes().clear();
         });
+    }
+
+    @Override
+    public void undo() {
+        new GroupCommand(drawingPane).execute();
+    }
+
+    @Override
+    public void redo() {
+        for (ShapeGroupComposite group: shapesBackup) {
+            drawingPane.removeShape(group);
+            shapesBackup.forEach(s->drawingPane.addShape(s));
+        }
     }
 }
