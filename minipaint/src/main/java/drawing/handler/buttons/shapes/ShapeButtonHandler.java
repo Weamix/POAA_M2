@@ -2,7 +2,6 @@ package drawing.handler.buttons.shapes;
 
 import drawing.DrawingPane;
 import drawing.adapter.IShape;
-import drawing.adapter.ShapeAdapter;
 import drawing.commands.ShapeCommand;
 import javafx.event.ActionEvent;
 import javafx.event.Event;

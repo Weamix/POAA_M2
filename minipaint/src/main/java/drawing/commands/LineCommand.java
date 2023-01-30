@@ -16,7 +16,11 @@ public class LineCommand implements ICommand {
     public void execute() throws Exception {
         if(drawingPane.getListSelectedShapes().isEmpty()){
             throw new Exception("No shape selected");
-        } else if(drawingPane.getListSelectedShapes().size() > 2){
+        }
+        else if(drawingPane.getListSelectedShapes().size() == 1){
+            throw new Exception("You need to select 2 shapes to create an edge");
+        }
+        else if(drawingPane.getListSelectedShapes().size() > 2){
             throw new Exception("Too many shapes selected");
         }
 
