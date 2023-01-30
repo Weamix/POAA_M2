@@ -47,4 +47,15 @@ public class ShapeAdapter implements IShape {
     public void removeShapeFromPane(Pane pane) {
         pane.getChildren().remove(shape);
     }
+
+    @Override
+    public IShape clone() {
+        final var union = Shape.union(shape, shape);
+        shape.getStyleClass()
+                .forEach(css -> union.getStyleClass().add(css));
+
+        ShapeAdapter clone = new ShapeAdapter(union);
+        clone.setSelected(selected);
+        return clone;
+    }
 }

@@ -54,4 +54,11 @@ public class ShapeGroupComposite implements IShape {
     public void removeShapeFromPane(Pane pane) {
         groupShapes.forEach(shape -> shape.removeShapeFromPane(pane));
     }
+
+    @Override
+    public IShape clone() {
+        ShapeGroupComposite clone = new ShapeGroupComposite();
+        groupShapes.forEach(shape -> clone.addShape(shape.clone()));
+        return clone;
+    }
 }
