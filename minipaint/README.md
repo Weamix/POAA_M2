@@ -15,3 +15,5 @@ Cette application en JavaFX, permettant de dessiner des formes géométriques, v
 # How to run?
 In Maven plugin command 
 `mvn clean javafx:run`
+
+![img.png](img.png)
