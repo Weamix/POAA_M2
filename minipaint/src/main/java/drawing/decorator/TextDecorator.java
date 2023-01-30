@@ -1,6 +1,7 @@
 package drawing.decorator;
 
 import drawing.adapter.IShape;
+import drawing.composite.ShapeGroupComposite;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
@@ -9,9 +10,13 @@ public class TextDecorator implements IShape {
     private IShape wrappee;
     private Label label;
 
-    public TextDecorator(IShape wrappee, String text) {
+    public TextDecorator(IShape wrappee, String text) throws IllegalArgumentException {
         this.wrappee = wrappee;
         label = new Label(text);
+
+        if(wrappee instanceof ShapeGroupComposite){
+            throw new IllegalArgumentException("Cannot add text to a group of shapes");
+        }
     }
 
     @Override

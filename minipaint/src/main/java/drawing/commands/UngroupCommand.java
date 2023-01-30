@@ -18,7 +18,10 @@ public class UngroupCommand implements ICommand{
     }
 
     @Override
-    public void execute() {
+    public void execute() throws Exception {
+        if(drawingPane.getListSelectedShapes().isEmpty()){
+            throw new Exception("No shape selected");
+        }
         final List<IShape> selectedShapes = drawingPane.getListSelectedShapes();
         selectedShapes.forEach(shape -> {
             if (shape instanceof ShapeGroupComposite){
@@ -33,7 +36,12 @@ public class UngroupCommand implements ICommand{
 
     @Override
     public void undo() {
-        new GroupCommand(drawingPane).execute();
+        try {
+            new GroupCommand(drawingPane).execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

@@ -24,6 +24,7 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
     private List<Observer> observers;
 
     private CommandHistory commandHistory;
+    private String error;
 
     public DrawingPane() {
         clipChildren();
@@ -31,7 +32,7 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
         observers = new ArrayList<>();
         mouseMoveHandler = new MouseMoveHandler(this);
         selectionHandler = new SelectionHandler(this);
-        commandHistory = new CommandHistory();
+        commandHistory = new CommandHistory(this);
     }
 
 
@@ -69,7 +70,7 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
     }
 
     public void updateObservers(){
-        observers.forEach(observer -> observer.update(shapes, getListSelectedShapes()));
+        observers.forEach(observer -> observer.update(shapes, getListSelectedShapes(), error));
     }
 
     public List<IShape> getListSelectedShapes(){
@@ -95,5 +96,9 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
 
     public CommandHistory getCommandHistory() {
         return commandHistory;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 }

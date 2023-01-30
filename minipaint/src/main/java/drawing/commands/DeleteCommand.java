@@ -16,7 +16,10 @@ public class DeleteCommand implements ICommand{
     }
 
     @Override
-    public void execute() {
+    public void execute() throws Exception {
+        if(drawingPane.getListSelectedShapes().isEmpty()){
+            throw new Exception("No shape selected");
+        }
         for (IShape shape : drawingPane.getListSelectedShapes()) {
             drawingPane.removeShape(shape);
             shapesBackup.add(shape);

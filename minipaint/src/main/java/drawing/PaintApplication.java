@@ -1,5 +1,6 @@
 package drawing;
 
+import drawing.ui.bar.ErrorBar;
 import drawing.ui.bar.StatutBar;
 import drawing.ui.bar.Toolbar;
 import javafx.application.Application;
@@ -24,6 +25,7 @@ public class PaintApplication extends Application {
     private BorderPane root;
     private DrawingPane drawingPane;
     private StatutBar statutBar;
+    private ErrorBar errorBar;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -31,6 +33,7 @@ public class PaintApplication extends Application {
         scene = new Scene(root, WIDTH, HEIGHT);
         HBox hBox = new HBox();
         statutBar = new StatutBar();
+        errorBar = new ErrorBar();
 
         root.getStylesheets().add(
                 PaintApplication.class.getClassLoader().getResource("style/Paint.css").toExternalForm());
@@ -38,6 +41,7 @@ public class PaintApplication extends Application {
         drawingPane = new DrawingPane();
         drawingPane.getStyleClass().add("drawingPane");
         drawingPane.addObserver(statutBar);
+        drawingPane.addObserver(errorBar);
         root.setCenter(drawingPane);
 
         Toolbar.initToolbar(drawingPane);
@@ -50,8 +54,13 @@ public class PaintApplication extends Application {
         statutBar.setSpacing(5.0);
         statutBar.getStyleClass().add("toolbar");
 
+        errorBar.setPadding(new Insets(5));
+        errorBar.setSpacing(5.0);
+        errorBar.getStyleClass().add("toolbar");
+
         root.setTop(hBox);
         root.setBottom(statutBar);
+        root.setBottom(errorBar);
 
         primaryStage.setTitle("Drawing");
         primaryStage.setScene(scene);

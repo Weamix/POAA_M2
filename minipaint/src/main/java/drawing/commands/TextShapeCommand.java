@@ -7,6 +7,7 @@ import drawing.decorator.TextDecorator;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class TextShapeCommand implements  ICommand{
 
     private DrawingPane drawingPane;
@@ -24,7 +25,11 @@ public class TextShapeCommand implements  ICommand{
     }
 
     @Override
-    public void execute() {
+    public void execute() throws Exception {
+        if(drawingPane.getListSelectedShapes().isEmpty()){
+            throw new Exception("No shape selected");
+        }
+
         backupShapes.addAll(drawingPane.getListSelectedShapes());
 
         backupShapes.forEach(shape -> {

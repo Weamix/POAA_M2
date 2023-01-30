@@ -29,7 +29,7 @@ public class StatutBar extends HBox implements Observer{
     }
 
     @Override
-    public void update(final List<IShape> shapes, final List<IShape> selectedShapes) {
+    public void update(final List<IShape> shapes, final List<IShape> selectedShapes, String error) {
         nbForms.setText(shapes.size() + FORME_S);
         nbSelectedForms.setText(" dont "+ selectedShapes.size() + SELECTED_FORME_S);
     }

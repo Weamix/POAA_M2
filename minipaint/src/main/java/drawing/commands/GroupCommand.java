@@ -16,7 +16,10 @@ public class GroupCommand implements ICommand{
     }
 
     @Override
-    public void execute() {
+    public void execute() throws Exception {
+        if(drawingPane.getListSelectedShapes().isEmpty()){
+            throw new Exception("No shape selected");
+        }
         final List<IShape> selectedShapes = drawingPane.getListSelectedShapes();
         if (selectedShapes != null && selectedShapes.size() > 1) {
             selectedShapes.forEach(drawingPane::removeShape);
@@ -30,7 +33,11 @@ public class GroupCommand implements ICommand{
 
     @Override
     public void undo() {
-        new UngroupCommand(drawingPane).execute();
+        try {
+            new UngroupCommand(drawingPane).execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
