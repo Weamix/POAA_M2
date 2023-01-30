@@ -73,7 +73,7 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
     }
 
     public List<IShape> getListSelectedShapes(){
-        return selectionHandler.getListSelectedShape();
+        return new ArrayList<>(selectionHandler.getListSelectedShape());
     }
 
     public List<IShape> getShapes() {

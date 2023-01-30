@@ -4,12 +4,19 @@ import drawing.DrawingPane;
 import drawing.adapter.IShape;
 import drawing.decorator.TextDecorator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TextShapeCommand implements  ICommand{
 
     private DrawingPane drawingPane;
-    private IShape backupShape;
-    private IShape shapeWithText;
+    private List<IShape> backupShapes = new ArrayList<>();
+    private List<IShape> shapesWithText = new ArrayList<>();
     private String text;
+
+    public TextShapeCommand(DrawingPane drawingPane) {
+        this(drawingPane,"Nemo");
+    }
 
     public TextShapeCommand(DrawingPane drawingPane, String text) {
         this.drawingPane = drawingPane;
@@ -18,19 +25,29 @@ public class TextShapeCommand implements  ICommand{
 
     @Override
     public void execute() {
-        backupShape = drawingPane.getListSelectedShapes().get(0);
-        drawingPane.removeShape(backupShape);
-        shapeWithText = new TextDecorator(backupShape, text);
-        drawingPane.addShape(shapeWithText);
+        backupShapes.addAll(drawingPane.getListSelectedShapes());
+
+        backupShapes.forEach(shape -> {
+            IShape shapeWithText = new TextDecorator(shape, text);
+            drawingPane.removeShape(shape);
+            shapesWithText.add(shapeWithText);
+            drawingPane.addShape(shapeWithText);
+        });
     }
 
     @Override
     public void undo() {
-
+        shapesWithText.forEach(shape -> {
+            drawingPane.removeShape(shape);
+            drawingPane.addShape(backupShapes.get(shapesWithText.indexOf(shape)));
+        });
     }
 
     @Override
     public void redo() {
-
+        shapesWithText.forEach(shape -> {
+            drawingPane.removeShape(backupShapes.get(shapesWithText.indexOf(shape)));
+            drawingPane.addShape(shape);
+        });
     }
 }

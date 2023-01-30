@@ -3,12 +3,13 @@ package drawing.commands;
 import drawing.DrawingPane;
 import drawing.adapter.IShape;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShapeDuplicateCommand implements ICommand {
 
     private DrawingPane drawingPane;
-    private List<IShape> duplicatedShapes;
+    private List<IShape> duplicatedShapes = new ArrayList<>();
 
     public ShapeDuplicateCommand(DrawingPane drawingPane) {
         this.drawingPane = drawingPane;
@@ -23,6 +24,7 @@ public class ShapeDuplicateCommand implements ICommand {
             drawingPane.addShape(clone);
             duplicatedShapes.add(clone);
         });
+        drawingPane.getListSelectedShapes().clear();
     }
 
     @Override
