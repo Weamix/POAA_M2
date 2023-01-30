@@ -1,6 +1,7 @@
 package drawing.composite;
 
 import drawing.adapter.IShape;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
@@ -60,5 +61,15 @@ public class ShapeGroupComposite implements IShape {
         ShapeGroupComposite clone = new ShapeGroupComposite();
         groupShapes.forEach(shape -> clone.addShape(shape.clone()));
         return clone;
+    }
+
+    @Override
+    public ObservableValue translateXProperty() {
+        return null;
+    }
+
+    @Override
+    public ObservableValue translateYProperty() {
+        return null;
     }
 }

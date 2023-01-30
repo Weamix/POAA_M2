@@ -1,18 +1,27 @@
-package drawing.adapter;
+package drawing;
 
+import drawing.adapter.IShape;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Shape;
+import javafx.scene.shape.Line;
 
-public class ShapeAdapter implements IShape {
+public class Edge implements IShape {
 
-    Shape shape;
+    private IShape from;
+    private IShape to;
+    private Line shape;
+
     private boolean selected;
-    private double x;
-    private double y;
 
-    public ShapeAdapter(Shape shape) {
-        this.shape = shape;
+    public Edge(IShape from, IShape to) {
+        this.from = from;
+        this.to = to;
+
+        shape  = new Line();
+        shape.startXProperty().bind(from.translateXProperty());
+        shape.startYProperty().bind(from.translateYProperty());
+        shape.endXProperty().bind(to.translateXProperty());
+        shape.endYProperty().bind(to.translateYProperty());
     }
 
     @Override
@@ -23,6 +32,9 @@ public class ShapeAdapter implements IShape {
     @Override
     public void setSelected(boolean selected) {
         this.selected = selected;
+        from.setSelected(selected);
+        to.setSelected(selected);
+
         if(selected) {
             shape.getStyleClass().add("selected");
         }else{
@@ -37,15 +49,11 @@ public class ShapeAdapter implements IShape {
 
     @Override
     public void offset(double x, double y) {
-        shape.setTranslateX(x + shape.getTranslateX());
-        shape.setTranslateY(y + shape.getTranslateY());
     }
 
     @Override
     public void addShapeToPane(Pane pane) {
         pane.getChildren().add(shape);
-        x = shape.getBoundsInParent().getCenterX();
-        y = shape.getBoundsInParent().getCenterY();
     }
 
     @Override
@@ -55,22 +63,16 @@ public class ShapeAdapter implements IShape {
 
     @Override
     public IShape clone() {
-        final var union = Shape.union(shape, shape);
-        shape.getStyleClass()
-                .forEach(css -> union.getStyleClass().add(css));
-
-        ShapeAdapter clone = new ShapeAdapter(union);
-        clone.setSelected(selected);
-        return clone;
+        return null;
     }
 
     @Override
     public ObservableValue translateXProperty() {
-        return shape.translateXProperty().add(x);
+        return null;
     }
 
     @Override
     public ObservableValue translateYProperty() {
-        return shape.translateYProperty().add(y);
+        return null;
     }
 }

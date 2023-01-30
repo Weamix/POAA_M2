@@ -37,6 +37,7 @@ public class Toolbar {
         buttons.add(ButtonFactory.createButton("Redo", event -> drawingPane.getCommandHistory().redo(), "redo.png",TEXT_ONLY));
         buttons.add(ButtonFactory.createButton("Duplicate", new ButtonHandler(new ShapeDuplicateCommand(drawingPane), drawingPane), "dupplicate.png",TEXT_ONLY));
         buttons.add(ButtonFactory.createButton("Text", new ButtonHandler(new TextShapeCommand(drawingPane,"nemo"), drawingPane), "nemo.png",TEXT_ONLY));
+        buttons.add(ButtonFactory.createButton("Line", new ButtonHandler(new LineCommand(drawingPane), drawingPane), "nemo.png",TEXT_ONLY));
 
 
         return new Toolbar(buttons);

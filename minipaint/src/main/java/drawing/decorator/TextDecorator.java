@@ -2,6 +2,7 @@ package drawing.decorator;
 
 import drawing.adapter.IShape;
 import drawing.composite.ShapeGroupComposite;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
@@ -13,6 +14,8 @@ public class TextDecorator implements IShape {
     public TextDecorator(IShape wrappee, String text) throws IllegalArgumentException {
         this.wrappee = wrappee;
         label = new Label(text);
+        label.translateXProperty().bind(wrappee.translateXProperty());
+        label.translateYProperty().bind(wrappee.translateYProperty());
 
         if(wrappee instanceof ShapeGroupComposite){
             throw new IllegalArgumentException("Cannot add text to a group of shapes");
@@ -37,8 +40,8 @@ public class TextDecorator implements IShape {
     @Override
     public void offset(double x, double y) {
         wrappee.offset(x, y);
-        label.setTranslateX(label.getTranslateX() + x);
-        label.setTranslateY(label.getTranslateY() + y);
+        //label.setTranslateX(label.getTranslateX() + x);
+        //label.setTranslateY(label.getTranslateY() + y);
     }
 
     @Override
@@ -56,5 +59,15 @@ public class TextDecorator implements IShape {
     @Override
     public IShape clone() {
         return wrappee.clone();
+    }
+
+    @Override
+    public ObservableValue translateXProperty() {
+        return null;
+    }
+
+    @Override
+    public ObservableValue translateYProperty() {
+        return null;
     }
 }

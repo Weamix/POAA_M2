@@ -17,10 +17,12 @@ public class ShapeDuplicateCommand implements ICommand {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws Exception {
+        if(drawingPane.getListSelectedShapes().isEmpty()){
+            throw new Exception("No shape selected");
+        }
         drawingPane.getListSelectedShapes().forEach(shape -> {
             IShape clone = shape.clone();
-            clone.setSelected(false);
             drawingPane.addShape(clone);
             duplicatedShapes.add(clone);
         });
